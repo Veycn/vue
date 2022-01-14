@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2022-01-13 20:14:29
+ * @LastEditTime: 2022-01-14 16:28:14
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /vue/src/core/global-api/extend.js
+ */
 /* @flow */
 
 import { ASSET_TYPES } from 'shared/constants'
@@ -27,12 +35,16 @@ export function initExtend (Vue: GlobalAPI) {
 
     const name = extendOptions.name || Super.options.name
     if (process.env.NODE_ENV !== 'production' && name) {
+      // 开发环境验证组件的名称是否合法
       validateComponentName(name)
     }
 
     const Sub = function VueComponent (options) {
+      // 调用 Vue 的 _init 方法，实例化组件
       this._init(options)
     }
+
+    // 所有的组件都继承自 Vue
     Sub.prototype = Object.create(Super.prototype)
     Sub.prototype.constructor = Sub
     Sub.cid = cid++
@@ -76,6 +88,7 @@ export function initExtend (Vue: GlobalAPI) {
 
     // cache constructor
     cachedCtors[SuperId] = Sub
+    // 返回组件的构造函数
     return Sub
   }
 }

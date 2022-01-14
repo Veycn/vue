@@ -27,8 +27,12 @@ export function initMixin (Vue: Class<Component>) {
     }
 
     // a flag to avoid this being observed
+    // 标记当前实例是 Vue 的实例
     vm._isVue = true
     // merge options
+    // 合并 options
+    // 用户传入的 options 和 Vue 实例化时候的 options 合并
+    // 组件才可以使用 Vue 构造函数中挂载的指令、组件、函数等
     if (options && options._isComponent) {
       // optimize internal component instantiation
       // since dynamic options merging is pretty slow, and none of the
@@ -49,6 +53,7 @@ export function initMixin (Vue: Class<Component>) {
     }
     // expose real self
     vm._self = vm
+    // 初始化生命周期
     initLifecycle(vm)
     initEvents(vm)
     initRender(vm)
