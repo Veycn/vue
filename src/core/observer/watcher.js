@@ -104,6 +104,8 @@ export default class Watcher {
     let value
     const vm = this.vm
     try {
+      // 如果这是 渲染 watcher getter 就是 updateComponent
+      // 如果这是 用户 watcher getter 就是 属性访问器
       value = this.getter.call(vm, vm)
     } catch (e) {
       if (this.user) {

@@ -46,9 +46,13 @@ export function initMixin (Vue: Class<Component>) {
       )
     }
     /* istanbul ignore else */
+    // 设置渲染时候的代理对象
     if (process.env.NODE_ENV !== 'production') {
+      // 开发环境调用 initProxy 处理
+      // 如果当前环境支持 Proxy, 当前实例会被 Proxy 代理
       initProxy(vm)
     } else {
+      // 代理对象 即 vue 实例
       vm._renderProxy = vm
     }
     // expose real self
